@@ -1,44 +1,27 @@
 <?php
 
 include 'config.php';
-session_start();
 
 if(isset($_POST['submit'])){
 
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+   $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+   $user_type = $_POST['user_type'];
 
-   $select_users = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email' AND password = '$pass'") or die('query failed');
+   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
-
-      $row = mysqli_fetch_assoc($select_users);
-
-      if($row['user_type'] == 'admin'){
-
-         $_SESSION['admin_name'] = $row['name'];
-         $_SESSION['admin_email'] = $row['email'];
-         $_SESSION['admin_id'] = $row['id'];
-         header('location:admin_page.php');
-
-      }elseif($row['user_type'] == 'user'){
-
-         $_SESSION['user_name'] = $row['name'];
-         $_SESSION['user_email'] = $row['email'];
-         $_SESSION['user_id'] = $row['id'];
-         header('location:home.php');
-
-      }elseif($row['user_type'] == 'staff'){
-
-         $_SESSION['staff_name'] = $row['name'];
-         $_SESSION['staff_email'] = $row['email'];
-         $_SESSION['staff_id'] = $row['id'];
-         header('location:staff_home.php');
-
-      }
-
+      $message[] = 'user already exist!';
    }else{
-      $message[] = 'incorrect email or password!';
+      if($pass != $cpass){
+         $message[] = 'confirm password not matched!';
+      }else{
+         mysqli_query($conn, "INSERT INTO `users`(name, email, password, user_type) VALUES('$name', '$email', '$cpass', '$user_type')") or die('query failed');
+         $message[] = 'registered successfully!';
+         header('location:login.php');
+      }
    }
 
 }
@@ -51,7 +34,8 @@ if(isset($_POST['submit'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>login</title>
+   <title>register</title>
+
    <style>
       *{
       margin: 0;
@@ -61,34 +45,35 @@ if(isset($_POST['submit'])){
   }
   body{
       height: 100vh;
-      background-image: url('bg.gif');
+      background-image: url('regis.gif');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
   }
   
-  .login{
+  .regis{
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
       padding: 20px 25px;
       width: 300px;
+  
       background-color: rgba(0,0,0,.7);
       box-shadow: 0 0 10px rgba(255,255,255,.3);
   }
-  .login h1{
+  .regis h1{
       text-align: center;
       color: #fafafa;
       margin-bottom: 30px;
       text-transform: uppercase;
-      border-bottom: 4px solid #2979ff
+      border-bottom: 4px solid #2979ff;
   }
-  .login label{
+  .regis label{
       text-align: left;
       color: #90caf9;
   }
-  .login form input{
+  .regis form input{
       width: calc(100% - 20px);
       padding: 8px 10px;
       margin-bottom: 15px;
@@ -98,16 +83,17 @@ if(isset($_POST['submit'])){
       color: #fff;
       font-size: 20px;
   }
-  .login form button{
+  
+  .regis form button{
       width: 100%;
       padding: 5px 0;
       border: 10px;
-      background-color:#00BFFF;
+      background-color:#ff0055;
       font-size: 18px;
       color: #fff;
   }
   
-  .login a {
+  .regis a {
     margin-top:5px;
     padding:5px 0;
     color: #fff;
@@ -118,13 +104,16 @@ if(isset($_POST['submit'])){
     align-items: center;
   }
   
-  .login a:hover {
+  .regis a:hover {
     text-decoration: underline;
     cursor: pointer;
   }
     </style>
+
 </head>
 <body>
+
+
 
 <?php
 if(isset($message)){
@@ -139,14 +128,21 @@ if(isset($message)){
 }
 ?>
    
-<div class="login">
+<div class="regis">
 
    <form action="" method="post">
-      <h1>login now</h1>
+      <h1>register now</h1>
+      <input type="text" name="name" placeholder="enter your name" required class="box">
       <input type="email" name="email" placeholder="enter your email" required class="box">
       <input type="password" name="password" placeholder="enter your password" required class="box">
-      <button input type="submit" name="submit" value="login now" class="btn">Login</button>
-      <a href="register.php">don't have an account? register now </a>
+      <input type="password" name="cpassword" placeholder="confirm your password" required class="box">
+      <select name="user_type" class="box">
+         <option value="user">user</option>
+         <option value="admin">admin</option>
+         <option value="staff">staff</option>
+      </select><br><br>
+      <button type="submit" name="submit" value="register now" class="btn">register</button>
+      <a href="index.php">already have an account? login now</a>
    </form>
 
 </div>

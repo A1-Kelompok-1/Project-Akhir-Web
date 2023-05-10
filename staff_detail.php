@@ -6,7 +6,7 @@ session_start();
 $staff_id = $_SESSION['staff_id'];
 
 if(!isset($staff_id)){
-   header('location:login.php');
+   header('location:index.php');
 }
 
 if(isset($_POST['add_detail'])){
@@ -112,4 +112,4 @@ if(isset($_POST['close-update-detail'])){
 <script src="js/page_script.js"></script>
 
 </body>
-</html> -->
+</html>

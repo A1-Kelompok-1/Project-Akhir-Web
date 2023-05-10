@@ -117,7 +117,7 @@ D). Login Sebagai Staff
 Setelah berhasil login, terdapat tampilan di mana staff dapat menggunakan fitur yang ada. Beberapa fitur tersebut diantaranya:
 
 - Dashboard
-- 
+
 Pada tampilan dashboard, terdapat rincian dari total pending, total pembayaran, total vila yang sudah di reservasi, dan total pesan dari customer.
 
 ![image](https://github.com/dheaayusafitri/ProjectAkhirWeb/assets/120159860/644a067c-c8f1-4d2f-ab4e-1e2afdac11f3)

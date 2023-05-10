@@ -1,0 +1,76 @@
+/* Gaya untuk body */
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  /* Gaya untuk tabel */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 2em;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #1c344d;
+    color: #fff;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Gaya untuk gambar */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Gaya untuk footer */
+  footer {
+    text-align: center;
+    margin-top: 2em;
+    padding: 1em;
+    background-color: #1c344d;
+    color: #fff;
+  }
+  
+  /* Gaya untuk judul */
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2em;
+    color: #1c344d;
+  }
+  
+  /* Gaya untuk link */
+  a {
+    color: #1c344d;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Gaya untuk tombol */
+  button {
+    background-color: #1c344d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #003366;
+  }

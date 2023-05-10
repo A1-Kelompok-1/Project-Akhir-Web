@@ -95,7 +95,7 @@ if(isset($_POST['close-update-vila'])){
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Poducts</title>
+    <title>Vila</title>
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -112,7 +112,7 @@ if(isset($_POST['close-update-vila'])){
 
 <section class="add-products">
 
-   <h1 class="title">shop products</h1>
+   <h1 class="title">reservation vila</h1>
 
    <form action="" method="post" enctype="multipart/form-data">
       <h3>add vila</h3>
@@ -144,7 +144,7 @@ if(isset($_POST['close-update-vila'])){
          <div class="price">$<?php echo $fetch_vila['price']; ?>/-</div>
          <a href="staff_products.php?update=<?php echo $fetch_vila['id']; ?>" class="option-btn">update</a>
          <a href="staff_products.php?delete=<?php echo $fetch_vila['id']; ?>" class="delete-btn" onclick="return confirm('delete this vila?');">delete</a>
-         <a href="staff_products.php?detail=<?php echo $fetch_vila['id']; ?>" class="option-btn">show detail</a>
+         <a href="staff_products.php?detail=<?php echo $fetch_vila['id_detail']; ?>" class="option-btn">show detail</a>
       </div>
       <?php
          }
@@ -186,18 +186,20 @@ if(isset($_POST['close-update-vila'])){
 <section class="edit-detail-form">
    <?php
       if(isset($_GET['detail'])){
-         $detail_id = $_GET['detail'];
-         $detail_query = mysqli_query($conn, "SELECT * FROM `detail_vila` WHERE id = '$detail_id'") or die('query failed');
-         if(mysqli_num_rows($detail_query) > 0){
-            while($fetch_detail = mysqli_fetch_assoc($detail_query)){
-   ?>
+         $tes = $_GET['detail'];
+         $select_detail_vila = mysqli_query($conn, "SELECT * FROM `detail_vila` where id = '$tes'") or die('query failed');
+         
+         if(mysqli_num_rows($select_detail_vila) > 0){
+            while($fetch_detail_vila = mysqli_fetch_assoc($select_detail_vila)){
+      ?>
+   
    <form action="staff_products.php" method="post" enctype="multipart/form-data">
        <label style="font-size:20px">Nama </label>
-    <input type="text" name="detail_nama_vila" value="<?php echo $fetch_detail['nama_vila']; ?>"disabled class="box" placeholder="enter nama_vila">
+    <input type="text" name="detail_nama_vila" value="<?php echo $fetch_detail_vila['nama_vila']; ?>"disabled class="box" placeholder="enter nama_vila">
     <label style="font-size:20px">Kota </label>
-      <input type="text" name="detail_kota" value="<?php echo $fetch_detail['kota']; ?>" class="box" disabled placeholder="enter kota">
+      <input type="text" name="detail_kota" value="<?php echo $fetch_detail_vila['kota']; ?>" class="box" disabled placeholder="enter kota">
       <label style="font-size:20px">Deskrpsi </label>
-      <input type="text" name="detail_deskripsi" value="<?php echo $fetch_detail['deskripsi']; ?>" class="box"   disabled placeholder="enter deskripsi_vila">
+      <input type="text" name="detail_deskripsi" value="<?php echo $fetch_detail_vila['deskripsi']; ?>" class="box"   disabled placeholder="enter deskripsi_vila">
       <input type="submit" value="close" id="close-update-vila" class="option-btn">
    </form>
    <?php
@@ -208,6 +210,7 @@ if(isset($_POST['close-update-vila'])){
       }
    ?>
 </section>
+
 <style>
   .product-image {
     max-width: 100%;

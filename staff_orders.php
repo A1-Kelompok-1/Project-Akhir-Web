@@ -39,7 +39,7 @@ if(isset($_GET['delete'])){
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom admin css file link  -->
-   <link rel="stylesheet" href="css/admin_style.css">
+   <link rel="stylesheet" href="css/admin1.css">
 
 </head>
 <body>
@@ -52,29 +52,30 @@ if(isset($_GET['delete'])){
 
    <div class="box-container">
       <?php
-      $select_reservasi = mysqli_query($conn, "SELECT * FROM `reservasi`") or die('query failed');
-      if(mysqli_num_rows($select_reservasi) > 0){
-         while($fetch_reservasi = mysqli_fetch_assoc($select_reservasi)){
+      $select_orders = mysqli_query($conn, "SELECT * FROM `reservasi`") or die('query failed');
+      if(mysqli_num_rows($select_orders) > 0){
+         while($fetch_orders = mysqli_fetch_assoc($select_orders)){
       ?>
       <div class="box">
-         <p> user id : <span><?php echo $fetch_reservasi['user_id']; ?></span> </p>
-         <p> placed on : <span><?php echo $fetch_reservasi['placed_on']; ?></span> </p>
-         <p> name : <span><?php echo $fetch_reservasi['name']; ?></span> </p>
-         <p> number : <span><?php echo $fetch_reservasi['number']; ?></span> </p>
-         <p> email : <span><?php echo $fetch_reservasi['email']; ?></span> </p>
-         <p> address : <span><?php echo $fetch_reservasi['address']; ?></span> </p>
-         <p> total products : <span><?php echo $fetch_reservasi['total_products']; ?></span> </p>
-         <p> total price : <span>$<?php echo $fetch_reservasi['total_price']; ?>/-</span> </p>
-         <p> payment method : <span><?php echo $fetch_reservasi['method']; ?></span> </p>
+         <p> user id : <span><?php echo $fetch_orders['user_id']; ?></span> </p>
+         <p> check in : <span><?php echo $fetch_orders['check_in']; ?></span> </p>
+         <p> placed on : <span><?php echo $fetch_orders['placed_on']; ?></span> </p>
+         <p> name : <span><?php echo $fetch_orders['name']; ?></span> </p>
+         <p> number : <span><?php echo $fetch_orders['number']; ?></span> </p>
+         <p> email : <span><?php echo $fetch_orders['email']; ?></span> </p>
+         <p> address : <span><?php echo $fetch_orders['address']; ?></span> </p>
+         <p> total products : <span><?php echo $fetch_orders['total_products']; ?></span> </p>
+         <p> total price : <span>$<?php echo $fetch_orders['total_price']; ?>/-</span> </p>
+         <p> payment method : <span><?php echo $fetch_orders['method']; ?></span> </p>
          <form action="" method="post">
-            <input type="hidden" name="order_id" value="<?php echo $fetch_reservasi['id']; ?>">
+            <input type="hidden" name="order_id" value="<?php echo $fetch_orders['id']; ?>">
             <select name="update_payment">
                <option value="" selected disabled><?php echo $fetch_orders['payment_status']; ?></option>
                <option value="pending">pending</option>
                <option value="completed">completed</option>
             </select>
             <input type="submit" value="update" name="update_order" class="option-btn">
-            <a href="staff_orders.php?delete=<?php echo $fetch_reservasi['id']; ?>" onclick="return confirm('delete this order?');" class="delete-btn">delete</a>
+            <a href="admin_orders.php?delete=<?php echo $fetch_orders['id']; ?>" onclick="return confirm('delete this order?');" class="delete-btn">delete</a>
          </form>
       </div>
       <?php
@@ -86,6 +87,9 @@ if(isset($_GET['delete'])){
    </div>
 
 </section>
+
+
+
 <!-- custom admin js file link  -->
 <script src="js/page_script.js"></script>
 

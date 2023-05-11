@@ -8,19 +8,18 @@ if(isset($_POST['submit'])){
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
    $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
-   $user_type = $_POST['user_type'];
 
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
-
+ 
    if(mysqli_num_rows($select_users) > 0){
       $message[] = 'user already exist!';
    }else{
       if($pass != $cpass){
          $message[] = 'confirm password not matched!';
       }else{
-         mysqli_query($conn, "INSERT INTO `users`(name, email, password, user_type) VALUES('$name', '$email', '$cpass', '$user_type')") or die('query failed');
+         mysqli_query($conn, "INSERT INTO `users`(name, email, password) VALUES('$name', '$email', '$cpass')") or die('query failed');
          $message[] = 'registered successfully!';
-         header('location:login.php');
+         header('location:index.php');
       }
    }
 
@@ -35,7 +34,6 @@ if(isset($_POST['submit'])){
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>register</title>
-
    <style>
       *{
       margin: 0;
@@ -88,7 +86,7 @@ if(isset($_POST['submit'])){
       width: 100%;
       padding: 5px 0;
       border: 10px;
-      background-color:#ff0055;
+      background-color:#00BFFF;
       font-size: 18px;
       color: #fff;
   }
@@ -109,11 +107,8 @@ if(isset($_POST['submit'])){
     cursor: pointer;
   }
     </style>
-
 </head>
 <body>
-
-
 
 <?php
 if(isset($message)){
@@ -136,11 +131,7 @@ if(isset($message)){
       <input type="email" name="email" placeholder="enter your email" required class="box">
       <input type="password" name="password" placeholder="enter your password" required class="box">
       <input type="password" name="cpassword" placeholder="confirm your password" required class="box">
-      <select name="user_type" class="box">
-         <option value="user">user</option>
-         <option value="admin">admin</option>
-         <option value="staff">staff</option>
-      </select><br><br>
+      <br><br>
       <button type="submit" name="submit" value="register now" class="btn">register</button>
       <a href="index.php">already have an account? login now</a>
    </form>

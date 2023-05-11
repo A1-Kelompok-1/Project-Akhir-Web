@@ -104,7 +104,7 @@ if(isset($_POST['add_to_cart'])){
 
       <div class="content">
          <h3>about us</h3>
-         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit quos enim minima ipsa dicta officia corporis ratione saepe sed adipisci?</p>
+         <p>Welcome to our villa reservation website! Our website is dedicated to providing you with the best villa reservation experience. We offer a wide selection of villas to suit your needs, whether you are looking for a romantic getaway, a family vacation, or a group retreat.</p>
          <a href="about.php" class="btn">read more</a>
       </div>
 
@@ -116,7 +116,7 @@ if(isset($_POST['add_to_cart'])){
 
    <div class="content">
       <h3>have any questions?</h3>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque cumque exercitationem repellendus, amet ullam voluptatibus?</p>
+      <p>Do you have any questions or concerns that you would like to address with us? Our team is here to assist you in any way possible and we are happy to answer any questions you may have about our services or the reservation process.</p>
       <a href="contact.php" class="white-btn">contact us</a>
    </div>
 

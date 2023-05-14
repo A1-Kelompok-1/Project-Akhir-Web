@@ -9,7 +9,7 @@ Secara keseluruhan, website reservasi vila ini memberikan solusi yang efektif da
 
 **2. Teks Editor ( VSCODE )**
 
-Bahasa pemrograman yang digunakan adalah PHP, Java script Dan menerapkan database pada website yang kami rancang, dengan nama shop_db.
+Bahasa pemrograman yang digunakan adalah PHP, Java script dan menerapkan database pada website yang kami rancang, dengan nama shop_db.
 
 **3. Implementasi Program**
 
@@ -98,12 +98,11 @@ Jika sudah mengisi maka bisa mengklik Reservation Now
 ![image](https://github.com/dheaayusafitri/ProjectAkhirWeb/assets/120159860/b03e4fb6-d685-45f4-9d21-66323094e7d2)
 
 
-Berikut tampilan pada invoice reservation user dan status nya masih pending, nanti akan diberikan status selanjutnya oleh staff
+Berikut tampilan pada invoice reservation user dan status nya masih pending, selanjutnya staff akan memberikan konfirmasi jika sudah berhasil.
 
 ![image](https://github.com/dheaayusafitri/ProjectAkhirWeb/assets/120159860/a04d4d4e-e540-4393-8bb9-6aeb7f3b8e2d)
 
 
-Dan sudah pasti, user dapat melakukan reservasi vila.
 
 - Button Akun
 
@@ -164,23 +163,23 @@ Setelah berhasil login, terdapat tampilan di mana admin dapat menggunakan fitur 
 
 - Home
 
-Pada halaman home, admin dapat melihat dashboard secara lengkap termasuk jumlah user yang login.
+Pada halaman home, terdapat dashboard berisi rincian secara lengkap mulai dari total reservasi vila yang terpending hingga jumlah pengguna yang melakukan login.
 
 ![image](https://github.com/dheaayusafitri/ProjectAkhirWeb/assets/120159860/2dc5b422-b7e2-471b-a55d-138a23ba65e3)
 
 - Users
 
-Pada fitur ini admin dapat melihat identitas admin yang melakukan login.
+Pada fitur ini admin dapat melihat rincian identitas yang melakukan login.
 ![image](https://github.com/dheaayusafitri/ProjectAkhirWeb/assets/120159860/a7ee1bee-bb37-49d6-bd61-c292695d1f01)
 
 
 - Add User
 
-Pada user ini admin dapat melakukan add user baru untuk customer apabila diperlukan, staff, dan admin.
+Pada user ini admin dapat menambahkan user baru untuk customer apabila diperlukan
 
 ![image](https://github.com/dheaayusafitri/ProjectAkhirWeb/assets/120159860/05718304-fd35-42c0-ba69-d49d08b5b218)
 
-User yang berhasil dibuat akan terlihat di halaman user seperti di bawah ini:
+User yang berhasil dibuat akan terlihat di halaman admin seperti di bawah ini:
 
 ![image](https://github.com/dheaayusafitri/ProjectAkhirWeb/assets/120159860/330ed32d-aab4-46ee-aa90-8aa7dd2ada7a)
 

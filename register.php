@@ -12,7 +12,21 @@ if(isset($_POST['submit'])){
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
  
    if(mysqli_num_rows($select_users) > 0){
-      $message[] = 'user already exist!';
+
+     echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'error',
+                    title: 'User Already Exist',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = 'register.php';
+                });
+                </script></body>";
+               exit;
+;
    }else{
       if($pass != $cpass){
          $message[] = 'confirm password not matched!';

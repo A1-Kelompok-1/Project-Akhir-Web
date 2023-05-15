@@ -1,7 +1,13 @@
 <?php
 
 include 'config.php';
+session_start();
 
+$admin_id = $_SESSION['admin_id'];
+
+if(!isset($admin_id)){
+   header('location:index.php');
+};
 if(isset($_POST['submit'])){
 
    $name = mysqli_real_escape_string($conn, $_POST['name']);
@@ -12,11 +18,35 @@ if(isset($_POST['submit'])){
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
-      $message[] = 'user already exist!';
+      echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'error',
+                    title: 'User Already Exist',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = 'admin_add_users.php';
+                });
+                </script></body>";
+               exit;
    }else{
       mysqli_query($conn, "INSERT INTO `users`(name, email, password, user_type) VALUES('$name', '$email', '$password', '$user_type')") or die('query failed');
-      $message[] = 'registered successfully!';
-      header('location:admin_users.php');
+      echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'User Successfully Added',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = 'admin_add_users.php';
+                });
+                </script></body>";
+               exit;
+      // header('location:admin_users.php');
    }
 
 }
@@ -40,16 +70,7 @@ if(isset($_POST['submit'])){
 <body>
 <link rel="stylesheet" href="css/style1.css">
 <?php
-if(isset($message)){
-   foreach($message as $message){
-      echo '
-      <div class="message">
-         <span>'.$message.'</span>
-         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-      </div>
-      ';
-   }
-}
+
 ?>
 
 <div class="form-container">
@@ -68,6 +89,8 @@ if(isset($message)){
    </form>
 
 </div>
-
+<!-- custom admin js file link  -->
+<script src="js/page_script.js"></script>
 </body>
+
 </html>

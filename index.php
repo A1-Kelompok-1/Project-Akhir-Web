@@ -19,26 +19,78 @@ if(isset($_POST['submit'])){
          $_SESSION['admin_name'] = $row['name'];
          $_SESSION['admin_email'] = $row['email'];
          $_SESSION['admin_id'] = $row['id'];
-         header('location:admin_page.php');
+         echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Login admin sukses',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = 'admin_page.php';
+                });
+                </script></body>";
+               exit;
 
       }elseif($row['user_type'] == 'user'){
 
          $_SESSION['user_name'] = $row['name'];
          $_SESSION['user_email'] = $row['email'];
          $_SESSION['user_id'] = $row['id'];
-         header('location:home.php');
+         echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+         <script>
+         Swal.fire({
+             position: 'top-center',
+             icon: 'success',
+             title: 'Login user sukses',
+             showConfirmButton: false,
+             timer: 1500
+         }).then(() => {
+             window.location.href = 'home.php';
+         });
+         </script></body>";
+        exit;
+
+       
 
       }elseif($row['user_type'] == 'staff'){
 
          $_SESSION['staff_name'] = $row['name'];
          $_SESSION['staff_email'] = $row['email'];
          $_SESSION['staff_id'] = $row['id'];
-         header('location:staff_home.php');
+         echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+         <script>
+         Swal.fire({
+             position: 'top-center',
+             icon: 'success',
+             title: 'Login staff sukses',
+             showConfirmButton: false,
+             timer: 1500
+         }).then(() => {
+             window.location.href = 'staff_home.php';
+         });
+         </script></body>";
+        exit;
+         
 
       }
 
    }else{
-      $message[] = 'incorrect email or password!';
+      echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+         <script>
+         Swal.fire({
+             position: 'top-center',
+             icon: 'error',
+             title: 'incorrect email or password!',
+             showConfirmButton: false,
+             timer: 1500
+         }).then(() => {
+             window.location.href = 'index.php';
+         });
+         </script></body>";
+        exit;
+      
    }
 
 }
@@ -150,6 +202,7 @@ if(isset($message)){
    </form>
 
 </div>
+
 
 </body>
 </html>

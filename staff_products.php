@@ -23,16 +23,57 @@ if(isset($_POST['add_vila'])){
    $select_vila_name = mysqli_query($conn, "SELECT name FROM `vila` WHERE name = '$name'") or die('query failed');
 
    if(mysqli_num_rows($select_vila_name) > 0){
-      $message[] = 'vila name already added';
+      echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'error',
+                    title: 'vila name already added',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = 'staff_products.php';
+                });
+                </script></body>";
+               exit;
+    
    }else{
-      $add_vila_query = mysqli_query($conn, "INSERT INTO `vila`(id_detail, name, price, image) VALUES('$id_detail', '$name', '$price', '$image')") or die('query failed');
+      $add_vila_query = mysqli_query($conn, "INSERT INTO `vila`(id_detail, name, price, image) VALUES('$id_detail', '$name', '$price', '$image')") or die("<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+      <script>
+      Swal.fire({
+          position: 'top-center',
+          icon: 'error',
+          title: 'Id Detail Not Found!',
+          showConfirmButton: false,
+          timer: 1500
+      }).then(() => {
+          window.location.href = 'staff_products.php';
+      });
+      </script></body>"
+     
+ );
 
       if($add_vila_query){
+      
          if($image_size > 2000000){
+
             $message[] = 'image size is too large';
          }else{
             move_uploaded_file($image_tmp_name, $image_folder);
-            $message[] = 'vila added successfully!';
+            echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'vila added successfully!',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                window.location.href = 'staff_products.php';
+            });
+            </script></body>";
+           exit;
+       
          }
       }else{
          $message[] = 'vila could not be added!';
@@ -46,7 +87,20 @@ if(isset($_GET['delete'])){
    $fetch_delete_image = mysqli_fetch_assoc($delete_image_query);
    unlink('uploaded_img/'.$fetch_delete_image['image']);
    mysqli_query($conn, "DELETE FROM `vila` WHERE id = '$delete_id'") or die('query failed');
-   header('location:staff_products.php');
+   echo "<body><script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+   <script>
+   Swal.fire({
+       position: 'top-center',
+       icon: 'success',
+       title: 'vila deleted successfully!',
+       showConfirmButton: false,
+       timer: 1500
+   }).then(() => {
+       window.location.href = 'staff_products.php';
+   });
+   </script></body>";
+  exit;
+
 }
 
 if(isset($_POST['update_vila'])){
@@ -66,6 +120,7 @@ if(isset($_POST['update_vila'])){
 
    if(!empty($update_image)){
       if($update_image_size > 2000000){
+
          $message[] = 'image file size is too large';
       }else{
          mysqli_query($conn, "UPDATE `vila` SET image = '$update_image' WHERE id = '$update_p_id'") or die('query failed');
